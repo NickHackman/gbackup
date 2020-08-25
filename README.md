@@ -1,5 +1,7 @@
 # go-backup
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/NickHackman/gbackup)](https://goreportcard.com/report/github.com/NickHackman/gbackup)
+
 A command-line utility that backs up folders and files to a device. 
 
 ## Config
