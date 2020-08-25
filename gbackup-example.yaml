@@ -62,7 +62,7 @@ backups:
   # `source` is where on the host machine a directory or file you'd like to backup
   # is located.
   #
-  # NOTE: Only `~` is properly expanded
+  # NOTE: Only `~` is properly expanded, but will expand to `root`
   #
   # Required
   - source: ~/Documents
