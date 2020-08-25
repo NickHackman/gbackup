@@ -98,3 +98,17 @@ backups:
 ## Screenshot
 
 ![screenshot](./images/screenshot.png)
+
+## Operating System Support
+
+- [X] Linux
+- [ ] MacOS
+- [ ] Windows
+- [ ] BSD
+
+gbackup has minimal support for filesystems right now, but it's fairly trivial to implement.
+
+In order to implement support for an operating system, it's required to implement the [`Device`](./device/device.go) interface and
+an alternative to `lsblk`.
+
+
