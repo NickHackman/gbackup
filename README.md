@@ -121,4 +121,6 @@ gbackup has minimal support for filesystems right now, but it's fairly trivial t
 In order to implement support for an operating system, it's required to implement the [`Device`](./device/device.go) interface and
 an alternative to `lsblk`.
 
+## License
 
+Licensed under [GPLv3](./LICENSE)
