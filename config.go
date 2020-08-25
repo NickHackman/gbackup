@@ -54,7 +54,7 @@ func (b *backupEntity) src() (string, error) {
 	return b.Source, nil
 }
 
-// newConfig: default configuration
+// newConfig default configuration
 func newConfig() *config {
 	return &config{
 		Name: defaultName,
@@ -62,7 +62,7 @@ func newConfig() *config {
 	}
 }
 
-// parseConfig: parses the configuration file located at
+// parseConfig parses the configuration file located at
 //
 // `$mounted_device_name/.gbackup.yml`
 func parseConfig(d device.Device) (*config, error) {

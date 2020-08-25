@@ -10,7 +10,7 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-// A Device given by `lsblk` on Linux
+// LinuxDevice A Device given by `lsblk` on Linux
 type LinuxDevice struct {
 	Name       string
 	Ro         bool
@@ -19,14 +19,14 @@ type LinuxDevice struct {
 	Children   []*LinuxDevice
 }
 
-// Path: returns the full path to the device
+// String returns the full path to the device
 //
 // Effectively `/dev/Name`
 func (d *LinuxDevice) String() string {
 	return fmt.Sprintf("/dev/%s", d.Name)
 }
 
-// Lsblk: lists devices using `lsblk` filtering out mounted, Read only, and crypt devices
+// Lsblk lists devices using `lsblk` filtering out mounted, Read only, and crypt devices
 //
 // `TYPE` must be "part"
 //
@@ -75,7 +75,7 @@ func Lsblk() ([]*LinuxDevice, error) {
 	return unmountedDevices, nil
 }
 
-// Mount: execs the "mount" command on Linux, differing from golang.org/x/sys/unix because
+// Mount execs the "mount" command on Linux, differing from golang.org/x/sys/unix because
 // mount (as seen in `$ man mount 8`) guesses the filesystem and other things about the device.
 func (d *LinuxDevice) Mount() error {
 	mountPath := d.MountpointPath()
@@ -85,7 +85,7 @@ func (d *LinuxDevice) Mount() error {
 	return exec.Command("mount", d.String(), d.MountpointPath()).Run()
 }
 
-// Unmount: uses the golang.org/x/sys/unix Unmount in order to unmount and cleanup
+// Unmount uses the golang.org/x/sys/unix Unmount in order to unmount and cleanup
 func (d *LinuxDevice) Unmount() error {
 	mountPath := d.MountpointPath()
 
@@ -102,7 +102,7 @@ func (d *LinuxDevice) Unmount() error {
 	return os.Remove(mountPath)
 }
 
-// MountpointPath: mounts a device to `/tmp/` on Unix of the name of
+// MountpointPath mounts a device to `/tmp/` on Unix of the name of
 //
 // `/tmp/dev-Name`
 func (d *LinuxDevice) MountpointPath() string {

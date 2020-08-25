@@ -8,11 +8,11 @@ import (
 	"github.com/NickHackman/gbackup/device"
 	"github.com/cheggaaa/pb/v3"
 	"github.com/jhoonb/archivex"
-	. "github.com/logrusorgru/aurora"
+	"github.com/logrusorgru/aurora"
 	"github.com/otiai10/copy"
 )
 
-// backupDevice: backup a device
+// backupDevice backup a device
 func backupDevice(device device.Device) error {
 	if err := device.Mount(); err != nil {
 		return fmt.Errorf("failed to mount: %v", err)
@@ -27,7 +27,7 @@ func backupDevice(device device.Device) error {
 		return fmt.Errorf("failed to backup: %v", err)
 	}
 
-	fmt.Printf("%s copied files\n", Green("✔"))
+	fmt.Printf("%s copied files\n", aurora.Green("✔"))
 
 	if config.Zip {
 		target := filepath.Join(device.MountpointPath(), config.Name)
@@ -39,14 +39,14 @@ func backupDevice(device device.Device) error {
 			return fmt.Errorf("failed to remove %s: %v", target, err)
 		}
 
-		fmt.Printf("%s zipped %s\n", Green("✔"), target)
+		fmt.Printf("%s zipped %s\n", aurora.Green("✔"), target)
 	}
 
 	if err := device.Unmount(); err != nil {
 		return fmt.Errorf("failed to unmount: %v", err)
 	}
 
-	fmt.Printf("%s unmounted %s\n", Green("✔"), device.MountpointPath())
+	fmt.Printf("%s unmounted %s\n", aurora.Green("✔"), device.MountpointPath())
 
 	return nil
 }
@@ -63,7 +63,7 @@ func skip(files []string) func(src string) (bool, error) {
 	}
 }
 
-// backup: copies all sources declared in `.gbackup.yml` to a new directory given by
+// backup copies all sources declared in `.gbackup.yml` to a new directory given by
 // `.gbackup.yml`'s `name` field rendering a progress bar.
 func backup(device device.Device, config *config) error {
 	dir := filepath.Join(device.MountpointPath(), config.Name)
@@ -103,7 +103,7 @@ func backup(device device.Device, config *config) error {
 	return nil
 }
 
-// zip: zips the directory made by `backup`
+// zip zips the directory made by `backup`
 func zip(target string) error {
 	zip := archivex.ZipFile{}
 	defer zip.Close()
