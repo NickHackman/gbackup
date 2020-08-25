@@ -94,3 +94,7 @@ backups:
       # The same as above, but for Rust's target/ directory.
       - target
 ```
+
+## Screenshot
+
+![screenshot](./images/screenshot.png)
