@@ -95,6 +95,14 @@ backups:
       - target
 ```
 
+## Non-Go Dependencies
+
+### Linux
+- lsblk
+- mount
+
+If it's possible to implement a better way than shelling out to `lsblk` and `mount`, please open a Pull Request.
+
 ## Screenshot
 
 ![screenshot](./images/screenshot.png)
