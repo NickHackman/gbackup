@@ -1,7 +1,10 @@
 # go-backup
 
-A command-line utility that backs up folders and files to a device. These folders and files are selected by a configuration file
-located on the device with a name of `gbackup.yml`.
+A command-line utility that backs up folders and files to a device. 
+
+## Config
+
+These folders and files are selected by a configuration file located on the device with a name of `gbackup.yml`.
 
 ``` yaml
 # Example Configuration File for gbackup
