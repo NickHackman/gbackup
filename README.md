@@ -1,4 +1,4 @@
-# go-backup
+# gbackup
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/NickHackman/gbackup)](https://goreportcard.com/report/github.com/NickHackman/gbackup)
 
