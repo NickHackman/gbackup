@@ -110,7 +110,7 @@ func zip(target string) error {
 	}
 
 	if _, err := os.Stat(zip.Name); err != nil {
-		return nil
+		return fmt.Errorf("failed to stat %s: %v", zip.Name, err)
 	}
 
 	if err := zip.AddAll(target, true); err != nil {
