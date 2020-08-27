@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/NickHackman/gbackup/device"
 	"github.com/cheggaaa/pb/v3"
@@ -57,6 +58,13 @@ func skip(files []string) func(src string) (bool, error) {
 		for _, file := range files {
 			if file == src {
 				return true, nil
+			}
+
+			split := strings.Split(src, string(os.PathSeparator))
+			for _, part := range split {
+				if file == part {
+					return true, nil
+				}
 			}
 		}
 		return false, nil
