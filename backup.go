@@ -112,7 +112,7 @@ func zip(target string) error {
 		return fmt.Errorf("failed to create zip at %s: %v", target, err)
 	}
 
-	if _, err := os.Stat(zip.Name); err == nil {
+	if _, err := os.Stat(zip.Name); err != nil {
 		return nil
 	}
 
