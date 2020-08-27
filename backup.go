@@ -77,13 +77,10 @@ func backup(device device.Device, config *config) error {
 
 	for _, backup := range config.Backups {
 		go func(backup *backupEntity) {
-			src, err := backup.src()
-			if err != nil {
-				errors <- err
-			}
+			src := backup.Source
+			dest := filepath.Join(dir, backup.Destination)
 
-			dest := filepath.Join(dir, backup.dest())
-			if err = copy.Copy(src, dest, copy.Options{Skip: skip(backup.Skip)}); err != nil {
+			if err := copy.Copy(src, dest, copy.Options{Skip: skip(backup.Skip)}); err != nil {
 				errors <- fmt.Errorf("failed to copy directory %s to %s: %w", src, dest, err)
 			}
 

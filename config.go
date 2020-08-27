@@ -29,29 +29,21 @@ type backupEntity struct {
 	Skip        []string
 }
 
-func (b *backupEntity) dest() string {
-	if b.Destination == "" {
-		_, file := filepath.Split(b.Source)
-		return file
-	}
-	return b.Destination
-}
-
-func (b *backupEntity) src() (string, error) {
+func tildeExpand(source string) (string, error) {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		return "", fmt.Errorf("failed to get user home directory: %w", err)
 	}
 
-	if b.Source == "~" {
+	if source == "~" {
 		return home, nil
 	}
 
-	if strings.HasPrefix(b.Source, "~/") {
-		return filepath.Join(home, b.Source[2:]), nil
+	if strings.HasPrefix(source, "~/") {
+		return filepath.Join(home, source[2:]), nil
 	}
 
-	return b.Source, nil
+	return source, nil
 }
 
 // newConfig default configuration
@@ -78,6 +70,16 @@ func parseConfig(d device.Device) (*config, error) {
 	}
 
 	conf.Name = time.Now().Format(conf.Name)
+
+	for _, backup := range conf.Backups {
+		if backup.Source, err = tildeExpand(backup.Source); err != nil {
+			return nil, fmt.Errorf("failed to expand source field: %v", err)
+		}
+		if backup.Destination == "" {
+			_, file := filepath.Split(backup.Source)
+			backup.Destination = file
+		}
+	}
 
 	return conf, nil
 }
