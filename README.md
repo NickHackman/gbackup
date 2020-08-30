@@ -116,7 +116,7 @@ If it's possible to implement a better way than shelling out to `lsblk` and `mou
 - [ ] Windows
 - [ ] BSD
 
-gbackup has minimal support for filesystems right now, but it's fairly trivial to implement.
+gbackup has minimal support for other operating systems right now, but it's fairly trivial to implement.
 
 In order to implement support for an operating system, it's required to implement the [`Device`](./device/device.go) interface and
 an alternative to `lsblk`.
