@@ -16,7 +16,7 @@ func main() {
 	}
 
 	prompt := promptui.Select{
-		Label: "Pick a unmounted device to backup to",
+		Label: "Pick an unmounted device to backup to",
 		Items: devices,
 	}
 
